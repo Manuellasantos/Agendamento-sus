@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUS+ - Início</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i> Agendamento SUS+
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Início
+                </a>
+                <a href="agendar.html" class="nav-link">
+                    <i class="fas fa-calendar-plus"></i> Agendar
+                </a>
+                <a href="minha-agenda.html" class="nav-link">
+                    <i class="fas fa-calendar-alt"></i> Minha Agenda
+                </a>
+            </nav>
+            <button class="acessibilidade-btn" id="btn-acessibilidade" aria-label="Aumentar tamanho da fonte">
+                <i class="fas fa-font"></i> A+
+            </button>
+        </div>
+    </header>
+
+    <!-- Cartões do dashboard -->
+    <div class="cartoes-container" >
+        <a href="agendar.html" class="card card-acao" aria-label="Agendar nova consulta">
+                <i class="fas fa-calendar-plus card-icon"></i>
+                <h2 class="card-titulo">Agendar Nova Consulta</h2>
+                <p>Marque uma nova consulta com especialistas do SUS</p>
+        </a>
+        
+        <a href="minha-agenda.html" class="card card-acao" aria-label="Ver minha agenda">
+                <i class="fas fa-calendar-check card-icon"></i>
+                <h2 class="card-titulo">Ver Minha Agenda</h2>
+                <p>Consulte suas consultas agendadas</p>
+        </a>
+        
+        <a href="minha-agenda.html" class="card card-acao" aria-label="Cancelar ou remarcar consulta">
+                <i class="fas fa-calendar-times card-icon"></i>
+                <h2 class="card-titulo">Cancelar/Remarcar</h2>
+                <p>Altere ou cancele suas consultas agendadas</p>
+        </a>
+    </div>
+    <!-- Rodapé -->
+<footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <p><i class="fas fa-stethoscope"></i> Sistema de Agendamento SUS+</p>
+                <p><i class="fas fa-phone"></i> Atendimento ao Cidadão: 136</p>
+                <p><i class="fas fa-info-circle"></i> Serviço gratuito do Ministério da Saúde</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">
+                    <i class="fas fa-question-circle"></i> Ajuda
+                </a>
+                <a href="#" class="footer-link">
+                    <i class="fas fa-shield-alt"></i> Privacidade
+                </a>
+                <a href="#" class="footer-link">
+                    <i class="fas fa-file-alt"></i> Termos de Uso
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- Scripts da aplicação -->
+    <script src="js/main.js"></script>
+</body>
+</html>

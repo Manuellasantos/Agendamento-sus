@@ -1,0 +1,155 @@
+/* Estilos específicos para a página Minha Agenda */
+
+/* Container principal */
+#minha-agenda {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Lista de consultas */
+.consulta-item {
+    border-left: 4px solid var(--azul-sus);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.consulta-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho da consulta */
+.consulta-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--cinza-claro);
+}
+
+.consulta-header i {
+    font-size: 2rem;
+    color: var(--azul-sus);
+}
+
+.consulta-header h3 {
+    font-size: 1.5rem;
+    color: var(--azul-sus);
+    margin: 0;
+}
+
+/* Informações da consulta */
+.consulta-info {
+    margin-bottom: 1.5rem;
+}
+
+.consulta-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.consulta-info i {
+    color: var(--azul-sus);
+    width: 20px;
+    text-align: center;
+}
+
+.consulta-info strong {
+    color: var(--azul-escuro);
+    min-width: 80px;
+}
+
+/* Ações da consulta */
+.consulta-acoes {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--cinza-claro);
+}
+
+.consulta-acoes .btn {
+    flex: 1;
+}
+
+/* Mensagem quando não há consultas */
+#mensagem-sem-consultas {
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--cinza-claro);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    color: var(--cinza-escuro);
+}
+
+#mensagem-sem-consultas i {
+    font-size: 3rem;
+    color: var(--azul-sus);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* Botão voltar ao início */
+#minha-agenda .botoes-finais {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+/* Estados de destaque */
+.consulta-item.proxima {
+    border-left-color: var(--verde-destaque);
+    background: linear-gradient(135deg, var(--branco) 0%, #f8fff8 100%);
+}
+
+.consulta-item.urgente {
+    border-left-color: var(--amarelo-destaque);
+    background: linear-gradient(135deg, var(--branco) 0%, #fffbf0 100%);
+}
+
+/* Responsividade da agenda */
+@media (max-width: 768px) {
+    .consulta-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .consulta-info p {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+    
+    .consulta-acoes {
+        flex-direction: column;
+    }
+    
+    .consulta-acoes .btn {
+        width: 100%;
+    }
+    
+    #mensagem-sem-consultas {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Animações para a lista */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.consulta-item {
+    animation: fadeIn 0.5s ease-out;
+}

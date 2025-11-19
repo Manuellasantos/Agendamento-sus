@@ -1,0 +1,514 @@
+/* TAMANHOS REDUZIDOS E ESCALÁVEIS */
+
+/* Layout Expandido para Agendamento */
+#agendar {
+    max-width: none;
+    width: 100%;
+}
+
+.agendar-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.passo-agendamento {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Títulos principais - tamanhos reduzidos */
+#agendar h1 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--azul-sus);
+    font-weight: 700;
+}
+
+#agendar h1 i {
+    margin-right: 0.8rem;
+}
+
+/* Container das etapas */
+.etapas-container {
+    margin: 0 auto 3rem auto;
+    max-width: 800px;
+    padding: 0 1.5rem;
+}
+
+.etapas {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Linha de fundo */
+.etapas::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    right: 30px;
+    height: 3px;
+    background: var(--cinza-claro);
+    z-index: 1;
+    border-radius: 2px;
+}
+
+/* Cada etapa individual */
+.etapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    text-align: center;
+}
+
+.etapa-marcador {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+/* Número/ícone da etapa - tamanhos reduzidos */
+.etapa-numero {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cinza-claro) 0%, #e8e8e8 100%);
+    color: var(--cinza-escuro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 3px solid var(--branco);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 3;
+}
+
+.etapa-numero i {
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+/* Linha entre os marcadores */
+.etapa-linha {
+    position: absolute;
+    left: 45px;
+    right: -15px;
+    height: 2px;
+    background: var(--cinza-claro);
+    z-index: 2;
+    transition: all 0.4s ease;
+}
+
+.etapa:last-child .etapa-linha {
+    display: none;
+}
+
+/* Conteúdo da etapa */
+.etapa-conteudo {
+    text-align: center;
+    max-width: 100px;
+}
+
+.etapa-texto {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cinza-escuro);
+    margin-bottom: 0.2rem;
+    transition: all 0.3s ease;
+}
+
+.etapa-descricao {
+    font-size: 0.7rem;
+    color: var(--cinza-medio);
+    line-height: 1.2;
+    transition: all 0.3s ease;
+}
+
+/* ESTADO ATIVO */
+.etapa.ativa .etapa-numero {
+    background: linear-gradient(135deg, var(--azul-sus) 0%, #0066cc 100%);
+    color: var(--branco);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 79, 159, 0.3);
+}
+
+.etapa.ativa .etapa-numero i {
+    transform: scale(1.05);
+}
+
+.etapa.ativa .etapa-texto {
+    color: var(--azul-sus);
+    font-weight: 800;
+}
+
+.etapa.ativa .etapa-descricao {
+    color: var(--azul-sus);
+    opacity: 0.9;
+}
+
+/* ESTADO CONCLUÍDO */
+.etapa.concluida .etapa-numero {
+    background: linear-gradient(135deg, var(--verde-destaque) 0%, #00cc66 100%);
+    color: var(--branco);
+    transform: scale(1.02);
+    box-shadow: 0 3px 12px rgba(0, 168, 89, 0.3);
+}
+
+.etapa.concluida .etapa-texto {
+    color: var(--verde-destaque);
+    font-weight: 700;
+}
+
+.etapa.concluida .etapa-descricao {
+    color: var(--verde-destaque);
+    opacity: 0.8;
+}
+
+.etapa.concluida .etapa-linha {
+    background: var(--verde-destaque);
+}
+
+/* Cartões - tamanhos reduzidos */
+#agendar .card {
+    max-width: none;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--cinza-claro);
+    margin-bottom: 1.5rem;
+}
+
+.etapa-card {
+    background: linear-gradient(135deg, var(--branco) 0%, #f8fbff 100%);
+}
+
+#agendar .card-titulo {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--azul-sus);
+    font-weight: 600;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid var(--cinza-claro);
+}
+
+#agendar .card-titulo i {
+    margin-right: 0.8rem;
+}
+
+/* Lista de opções - tamanhos reduzidos */
+#agendar .opcoes-lista {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+}
+
+#agendar .opcao-item {
+    padding: 1.2rem;
+    font-size: 1rem;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--cinza-claro);
+    background: var(--branco);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#agendar .opcao-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 79, 159, 0.15);
+    border-color: var(--azul-sus);
+}
+
+#agendar .opcao-item.selecionado {
+    background: linear-gradient(135deg, var(--azul-sus) 0%, #0066cc 100%);
+    color: var(--branco);
+    border-color: var(--azul-sus);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 79, 159, 0.25);
+}
+
+/* Texto das opções */
+.opcao-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+}
+
+.opcao-texto strong {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.opcao-descricao {
+    font-size: 0.85rem;
+    color: var(--cinza-escuro);
+    opacity: 0.8;
+    line-height: 1.3;
+}
+
+.opcao-item.selecionado .opcao-descricao {
+    color: var(--branco);
+    opacity: 0.9;
+}
+
+.opcao-item i {
+    font-size: 1.5rem;
+    width: 35px;
+    text-align: center;
+    color: var(--azul-sus);
+    transition: all 0.3s ease;
+}
+
+.opcao-item.selecionado i {
+    color: var(--branco);
+    transform: scale(1.05);
+}
+
+/* Botões de navegação - tamanhos reduzidos */
+.botoes-navegacao {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--cinza-claro);
+}
+
+#agendar .btn {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    min-width: 160px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+/* Resto do CSS permanece similar, mas com tamanhos reduzidos proporcionalmente */
+
+/* Calendário - tamanhos reduzidos */
+.calendario-container {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.calendario {
+    min-width: 100%;
+    font-size: 1rem;
+}
+
+.calendario th {
+    background-color: var(--azul-sus);
+    color: var(--branco);
+    padding: 0.8rem;
+    font-weight: 600;
+}
+
+.calendario td {
+    padding: 0.8rem;
+    border: 1px solid var(--cinza-claro);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Horários - tamanhos reduzidos */
+.horarios-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.horario-item {
+    padding: 1rem 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid var(--cinza-medio);
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--branco);
+}
+
+/* Resumo da consulta - tamanhos reduzidos */
+.resumo-consulta {
+    background-color: var(--cinza-claro);
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+}
+
+.resumo-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 2px solid var(--cinza-medio);
+    font-size: 1.1rem;
+}
+
+.resumo-label {
+    min-width: 200px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--azul-sus);
+}
+
+.resumo-label i {
+    font-size: 1.2rem;
+    width: 25px;
+}
+
+/* Mensagem de sucesso - tamanhos reduzidos */
+.mensagem-sucesso {
+    max-width: 500px;
+    margin: 1.5rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: var(--verde-destaque);
+    color: var(--branco);
+    text-align: center;
+}
+
+.sucesso-icon {
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
+}
+
+.mensagem-sucesso h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+}
+
+.mensagem-sucesso p {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+/* Campo de busca */
+.search-container {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--cinza-medio);
+}
+
+.search-container .form-input {
+    padding-left: 35px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .etapas-container {
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .etapas {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: flex-start;
+    }
+    
+    .etapas::before {
+        display: none;
+    }
+    
+    .etapa {
+        flex-direction: row;
+        text-align: left;
+        flex: none;
+        width: 100%;
+        gap: 0.8rem;
+    }
+    
+    .etapa-marcador {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+    
+    .etapa-numero {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .etapa-numero i {
+        font-size: 1rem;
+    }
+    
+    .etapa-linha {
+        display: none;
+    }
+    
+    .etapa-conteudo {
+        text-align: left;
+        max-width: none;
+        flex: 1;
+    }
+    
+    #agendar .opcoes-lista {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    #agendar .opcao-item {
+        padding: 1rem;
+        min-height: 60px;
+    }
+    
+    .botoes-navegacao {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    #agendar .btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    #agendar h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    #agendar .card {
+        padding: 1.5rem;
+    }
+    
+    .resumo-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .resumo-label {
+        min-width: auto;
+    }
+}

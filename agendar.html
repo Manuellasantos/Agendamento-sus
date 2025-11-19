@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento SUS+ - Agendar Consulta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/agendar.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i> Agendamento SUS+
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link" aria-label="Ir para o painel principal">
+                    <i class="fas fa-home"></i> Início
+                </a>
+                <a href="agendar.html" class="nav-link" aria-label="Ir para agendamento">
+                    <i class="fas fa-calendar-plus"></i> Agendar
+                </a>
+                <a href="minha-agenda.html" class="nav-link" aria-label="Ir para minha agenda">
+                    <i class="fas fa-calendar-alt"></i> Minha Agenda
+                </a>
+            </nav>
+            <button class="acessibilidade-btn" id="btn-acessibilidade" aria-label="Aumentar tamanho da fonte">
+                <i class="fas fa-font"></i> A+
+            </button>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <section id="agendar">
+            <div class="agendar-container">
+                <h1><i class="fas fa-calendar-plus"></i> Agendar Nova Consulta</h1>
+                
+                <!-- Etapas do processo - DESIGN MODERNO -->
+                <div class="etapas-container">
+                    <div class="etapas">
+                        <div class="etapa ativa" id="etapa1">
+                            <div class="etapa-marcador">
+                                <div class="etapa-numero">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="etapa-linha"></div>
+                            </div>
+                            <div class="etapa-conteudo">
+                                <div class="etapa-texto">Especialidade</div>
+                                <div class="etapa-descricao">Escolha a especialidade</div>
+                            </div>
+                        </div>
+                        
+                        <div class="etapa" id="etapa2">
+                            <div class="etapa-marcador">
+                                <div class="etapa-numero">
+                                    <i class="fas fa-hospital"></i>
+                                </div>
+                                <div class="etapa-linha"></div>
+                            </div>
+                            <div class="etapa-conteudo">
+                                <div class="etapa-texto">Unidade</div>
+                                <div class="etapa-descricao">Selecione a unidade</div>
+                            </div>
+                        </div>
+                        
+                        <div class="etapa" id="etapa3">
+                            <div class="etapa-marcador">
+                                <div class="etapa-numero">
+                                    <i class="fas fa-calendar-day"></i>
+                                </div>
+                                <div class="etapa-linha"></div>
+                            </div>
+                            <div class="etapa-conteudo">
+                                <div class="etapa-texto">Data e Hora</div>
+                                <div class="etapa-descricao">Escolha data e horário</div>
+                            </div>
+                        </div>
+                        
+                        <div class="etapa" id="etapa4">
+                            <div class="etapa-marcador">
+                                <div class="etapa-numero">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="etapa-conteudo">
+                                <div class="etapa-texto">Confirmação</div>
+                                <div class="etapa-descricao">Revise e confirme</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Etapa 1: Especialidade -->
+                <div id="passo-especialidade" class="passo-agendamento">
+                    <div class="card etapa-card">
+                        <h2 class="card-titulo">
+                            <i class="fas fa-user-md"></i> Selecione a Especialidade
+                        </h2>
+                        <div class="opcoes-lista" id="lista-especialidades">
+                            <div class="opcao-item" data-especialidade="clinica-geral">
+                                <i class="fas fa-user-md"></i> 
+                                <div class="opcao-texto">
+                                    <strong>Clínica Geral</strong>
+                                    <span class="opcao-descricao">Atenção básica e geral</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-especialidade="cardiologia">
+                                <i class="fas fa-heartbeat"></i>
+                                <div class="opcao-texto">
+                                    <strong>Cardiologia</strong>
+                                    <span class="opcao-descricao">Coração e circulação</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-especialidade="dermatologia">
+                                <i class="fas fa-allergies"></i>
+                                <div class="opcao-texto">
+                                    <strong>Dermatologia</strong>
+                                    <span class="opcao-descricao">Pele e cabelos</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-especialidade="ginecologia">
+                                <i class="fas fa-female"></i>
+                                <div class="opcao-texto">
+                                    <strong>Ginecologia</strong>
+                                    <span class="opcao-descricao">Saúde feminina</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-especialidade="pediatria">
+                                <i class="fas fa-baby"></i>
+                                <div class="opcao-texto">
+                                    <strong>Pediatria</strong>
+                                    <span class="opcao-descricao">Crianças e adolescentes</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-especialidade="ortopedia">
+                                <i class="fas fa-bone"></i>
+                                <div class="opcao-texto">
+                                    <strong>Ortopedia</strong>
+                                    <span class="opcao-descricao">Ossos e articulações</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botoes-navegacao">
+                        <button class="btn" id="btn-proximo-especialidade" disabled>
+                            <i class="fas fa-arrow-right"></i> Próxima Etapa
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Etapa 2: Unidade de Saúde -->
+                <div id="passo-unidade" class="passo-agendamento" style="display: none;">
+                    <div class="card etapa-card">
+                        <h2 class="card-titulo">
+                            <i class="fas fa-hospital"></i> Selecione a Unidade de Saúde
+                        </h2>
+                        <div class="form-group">
+                            <div class="search-container">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" id="busca-unidade" class="form-input" placeholder="Buscar unidade de saúde...">
+                            </div>
+                        </div>
+                        <div class="opcoes-lista" id="lista-unidades">
+                            <div class="opcao-item" data-unidade="usf-centro">
+                                <i class="fas fa-clinic-medical"></i>
+                                <div class="opcao-texto">
+                                    <strong>USF Centro</strong>
+                                    <span class="opcao-descricao">Unidade de Saúde da Família Centro</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-unidade="usf-norte">
+                                <i class="fas fa-clinic-medical"></i>
+                                <div class="opcao-texto">
+                                    <strong>USF Zona Norte</strong>
+                                    <span class="opcao-descricao">Unidade de Saúde da Família Zona Norte</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-unidade="usf-sul">
+                                <i class="fas fa-clinic-medical"></i>
+                                <div class="opcao-texto">
+                                    <strong>USF Zona Sul</strong>
+                                    <span class="opcao-descricao">Unidade de Saúde da Família Zona Sul</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-unidade="usf-leste">
+                                <i class="fas fa-clinic-medical"></i>
+                                <div class="opcao-texto">
+                                    <strong>USF Zona Leste</strong>
+                                    <span class="opcao-descricao">Unidade de Saúde da Família Zona Leste</span>
+                                </div>
+                            </div>
+                            <div class="opcao-item" data-unidade="usf-oeste">
+                                <i class="fas fa-clinic-medical"></i>
+                                <div class="opcao-texto">
+                                    <strong>USF Zona Oeste</strong>
+                                    <span class="opcao-descricao">Unidade de Saúde da Família Zona Oeste</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botoes-navegacao">
+                        <button class="btn btn-secundario" id="btn-voltar-unidade">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button class="btn" id="btn-proximo-unidade" disabled>
+                            <i class="fas fa-arrow-right"></i> Próxima Etapa
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Etapa 3: Data e Horário -->
+                <div id="passo-data-horario" class="passo-agendamento" style="display: none;">
+                    <div class="card etapa-card">
+                        <h2 class="card-titulo">
+                            <i class="fas fa-calendar-day"></i> Selecione a Data e Horário
+                        </h2>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="mes-calendario">
+                                <i class="fas fa-calendar-alt"></i> Mês:
+                            </label>
+                            <select id="mes-calendario" class="form-select">
+                                <option value="0">Janeiro</option>
+                                <option value="1">Fevereiro</option>
+                                <option value="2">Março</option>
+                                <option value="3">Abril</option>
+                                <option value="4">Maio</option>
+                                <option value="5">Junho</option>
+                            </select>
+                        </div>
+                        
+                        <div class="calendario-container">
+                            <table class="calendario" aria-label="Calendário de agendamento">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Dom</th>
+                                        <th scope="col">Seg</th>
+                                        <th scope="col">Ter</th>
+                                        <th scope="col">Qua</th>
+                                        <th scope="col">Qui</th>
+                                        <th scope="col">Sex</th>
+                                        <th scope="col">Sáb</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="corpo-calendario">
+                                    <!-- O calendário será preenchido via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="selecao-horarios" style="display: none; margin-top: 2rem;">
+                            <h3><i class="fas fa-clock"></i> Horários Disponíveis</h3>
+                            <div class="horarios-lista" id="lista-horarios">
+                                <!-- Os horários serão preenchidos via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botoes-navegacao">
+                        <button class="btn btn-secundario" id="btn-voltar-data">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button class="btn" id="btn-proximo-data" disabled>
+                            <i class="fas fa-arrow-right"></i> Próxima Etapa
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Etapa 4: Confirmação -->
+                <div id="passo-confirmacao" class="passo-agendamento" style="display: none;">
+                    <div class="card etapa-card">
+                        <h2 class="card-titulo">
+                            <i class="fas fa-check-circle"></i> Confirme seu Agendamento
+                        </h2>
+                        
+                        <div class="resumo-consulta">
+                            <div class="resumo-item">
+                                <div class="resumo-label">
+                                    <i class="fas fa-user-md"></i> Especialidade:
+                                </div>
+                                <div id="resumo-especialidade" class="resumo-valor">-</div>
+                            </div>
+                            
+                            <div class="resumo-item">
+                                <div class="resumo-label">
+                                    <i class="fas fa-hospital"></i> Unidade de Saúde:
+                                </div>
+                                <div id="resumo-unidade" class="resumo-valor">-</div>
+                            </div>
+                            
+                            <div class="resumo-item">
+                                <div class="resumo-label">
+                                    <i class="fas fa-calendar-alt"></i> Data:
+                                </div>
+                                <div id="resumo-data" class="resumo-valor">-</div>
+                            </div>
+                            
+                            <div class="resumo-item">
+                                <div class="resumo-label">
+                                    <i class="fas fa-clock"></i> Horário:
+                                </div>
+                                <div id="resumo-horario" class="resumo-valor">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botoes-navegacao">
+                        <button class="btn btn-secundario" id="btn-voltar-confirmacao">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button class="btn" id="btn-confirmar-agendamento">
+                            <i class="fas fa-check"></i> Confirmar Agendamento
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mensagem de sucesso -->
+                <div id="mensagem-sucesso" class="mensagem-sucesso" style="display: none;" aria-live="assertive">
+                    <div class="sucesso-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Agendamento Confirmado!</h2>
+                    <p>Seu agendamento foi realizado com sucesso.</p>
+                    <p>Você receberá uma confirmação por SMS.</p>
+                    
+                    <div class="botoes-finais">
+                        <button class="btn" id="btn-novo-agendamento">
+                            <i class="fas fa-calendar-plus"></i> Fazer Novo Agendamento
+                        </button>
+                        <a href="index.html" class="btn btn-inicio">
+                            <i class="fas fa-home"></i> Voltar ao Início
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <p><i class="fas fa-stethoscope"></i> Sistema de Agendamento SUS+</p>
+                <p><i class="fas fa-phone"></i> Atendimento ao Cidadão: 136</p>
+                <p><i class="fas fa-info-circle"></i> Serviço gratuito do Ministério da Saúde</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">
+                    <i class="fas fa-question-circle"></i> Ajuda
+                </a>
+                <a href="#" class="footer-link">
+                    <i class="fas fa-shield-alt"></i> Privacidade
+                </a>
+                <a href="#" class="footer-link">
+                    <i class="fas fa-file-alt"></i> Termos de Uso
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- Scripts da aplicação -->
+    <script src="js/main.js"></script>
+    <script src="js/agendar.js"></script>
+</body>
+</html>

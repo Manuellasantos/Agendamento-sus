@@ -1,0 +1,89 @@
+body{
+    background-image: url(https://blog.samisaude.com.br/wp-content/uploads/2021/07/cartao-nacional-de-saude.png);
+}
+
+/* Container de cartões do dashboard */
+.cartoes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Cartões de ação do dashboard */
+.cartoes-container .card {
+    text-align: center;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.cartoes-container .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cartoes-container .card-icon {
+    font-size: 3rem;
+    color: var(--azul-sus);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.cartoes-container .card-titulo {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--azul-sus);
+}
+
+.cartoes-container .card p {
+    color: var(--cinza-escuro);
+    line-height: 1.6;
+}
+
+/* Próxima consulta */
+#mensagem-proxima-consulta {
+    padding: 1.5rem;
+    background-color: var(--cinza-claro);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+#mensagem-proxima-consulta i {
+    color: var(--azul-sus);
+    margin-right: 0.5rem;
+}
+
+/* Título principal do dashboard */
+#dashboard h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--azul-sus);
+}
+
+#dashboard h1 i {
+    margin-right: 1rem;
+}
+
+#dashboard > p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--cinza-escuro);
+}
+
+/* Responsividade do dashboard */
+@media (max-width: 768px) {
+    .cartoes-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .cartoes-container .card {
+        padding: 1.5rem;
+    }
+    
+    .cartoes-container .card-icon {
+        font-size: 2.5rem;
+    }
+}
