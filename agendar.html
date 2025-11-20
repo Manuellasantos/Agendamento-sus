@@ -4,52 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento SUS+ - Agendar Consulta</title>
+    <meta name="description" content="Sistema de agendamento de consultas do SUS. Agende sua consulta de forma rápida e fácil.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/agendar.css">
 </head>
 <body>
     <!-- Cabeçalho -->
-    <header>
+    <header role="banner">
         <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-stethoscope"></i> Agendamento SUS+
+            <div class="logo" aria-label="Sistema de Agendamento SUS+">
+                <i class="fas fa-stethoscope" aria-hidden="true"></i> Agendamento SUS+
             </div>
-            <nav class="nav-menu">
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-home"></i> Início
+            <nav class="nav-menu" aria-label="Navegação principal">
+                <a href="index.html" class="nav-link" aria-label="Página inicial">
+                    <i class="fas fa-home" aria-hidden="true"></i> Início
                 </a>
-                <a href="agendar.html" class="nav-link">
-                    <i class="fas fa-calendar-plus"></i> Agendar
+                <a href="agendar.html" class="nav-link" aria-current="page" aria-label="Agendar nova consulta">
+                    <i class="fas fa-calendar-plus" aria-hidden="true"></i> Agendar
                 </a>
-                <a href="minha-agenda.html" class="nav-link">
-                    <i class="fas fa-calendar-alt"></i> Minha Agenda
+                <a href="minha-agenda.html" class="nav-link" aria-label="Minha agenda de consultas">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i> Minha Agenda
                 </a>
             </nav>
             <button class="fonte-btn" id="btn-acessibilidade" aria-label="Aumentar tamanho da fonte">
-                <i class="fas fa-font"></i> A+
+                <i class="fas fa-font" aria-hidden="true"></i> A+
             </button>
             <button class="daltonismo-btn" id="btn-daltonismo" aria-label="Ativar modo de daltonismo">
-                <i class="fas fa-eye"></i> Daltonismo
+                <i class="fas fa-eye" aria-hidden="true"></i> Daltonismo
             </button>
         </div>
     </header>
 
     <!-- Conteúdo Principal -->
-    <main>
-        <section id="agendar">
+    <main role="main">
+        <section id="agendar" aria-labelledby="titulo-agendar">
             <div class="agendar-container">
-                <h1><i class="fas fa-calendar-plus"></i> Agendar Nova Consulta</h1>
+                <h1 id="titulo-agendar"><i class="fas fa-calendar-plus" aria-hidden="true"></i> Agendar Nova Consulta</h1>
                 
                 <!-- Etapas do processo - DESIGN MODERNO -->
-                <div class="etapas-container">
-                    <div class="etapas">
-                        <div class="etapa ativa" id="etapa1">
+                <div class="etapas-container" aria-label="Progresso do agendamento">
+                    <div class="etapas" role="list" aria-label="Etapas do agendamento">
+                        <div class="etapa ativa" id="etapa1" role="listitem" aria-current="step">
                             <div class="etapa-marcador">
-                                <div class="etapa-numero">
-                                    <i class="fas fa-user-md"></i>
+                                <div class="etapa-numero" aria-hidden="true">
+                                    <i class="fas fa-user-md" aria-hidden="true"></i>
                                 </div>
-                                <div class="etapa-linha"></div>
+                                <div class="etapa-linha" aria-hidden="true"></div>
                             </div>
                             <div class="etapa-conteudo">
                                 <div class="etapa-texto">Especialidade</div>
@@ -57,12 +58,12 @@
                             </div>
                         </div>
                         
-                        <div class="etapa" id="etapa2">
+                        <div class="etapa" id="etapa2" role="listitem">
                             <div class="etapa-marcador">
-                                <div class="etapa-numero">
-                                    <i class="fas fa-hospital"></i>
+                                <div class="etapa-numero" aria-hidden="true">
+                                    <i class="fas fa-hospital" aria-hidden="true"></i>
                                 </div>
-                                <div class="etapa-linha"></div>
+                                <div class="etapa-linha" aria-hidden="true"></div>
                             </div>
                             <div class="etapa-conteudo">
                                 <div class="etapa-texto">Unidade</div>
@@ -70,12 +71,12 @@
                             </div>
                         </div>
                         
-                        <div class="etapa" id="etapa3">
+                        <div class="etapa" id="etapa3" role="listitem">
                             <div class="etapa-marcador">
-                                <div class="etapa-numero">
-                                    <i class="fas fa-calendar-day"></i>
+                                <div class="etapa-numero" aria-hidden="true">
+                                    <i class="fas fa-calendar-day" aria-hidden="true"></i>
                                 </div>
-                                <div class="etapa-linha"></div>
+                                <div class="etapa-linha" aria-hidden="true"></div>
                             </div>
                             <div class="etapa-conteudo">
                                 <div class="etapa-texto">Data e Hora</div>
@@ -83,10 +84,10 @@
                             </div>
                         </div>
                         
-                        <div class="etapa" id="etapa4">
+                        <div class="etapa" id="etapa4" role="listitem">
                             <div class="etapa-marcador">
-                                <div class="etapa-numero">
-                                    <i class="fas fa-check-circle"></i>
+                                <div class="etapa-numero" aria-hidden="true">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="etapa-conteudo">
@@ -98,49 +99,49 @@
                 </div>
                 
                 <!-- Etapa 1: Especialidade -->
-                <div id="passo-especialidade" class="passo-agendamento">
+                <div id="passo-especialidade" class="passo-agendamento" aria-labelledby="titulo-especialidade" role="region">
                     <div class="card etapa-card">
-                        <h2 class="card-titulo">
-                            <i class="fas fa-user-md"></i> Selecione a Especialidade
+                        <h2 class="card-titulo" id="titulo-especialidade">
+                            <i class="fas fa-user-md" aria-hidden="true"></i> Selecione a Especialidade
                         </h2>
-                        <div class="opcoes-lista" id="lista-especialidades">
-                            <div class="opcao-item" data-especialidade="clinica-geral">
-                                <i class="fas fa-user-md"></i> 
+                        <div class="opcoes-lista" id="lista-especialidades" role="listbox" aria-labelledby="titulo-especialidade">
+                            <div class="opcao-item" data-especialidade="clinica-geral" role="option" tabindex="0" aria-label="Clínica Geral - Atenção básica e geral">
+                                <i class="fas fa-user-md" aria-hidden="true"></i> 
                                 <div class="opcao-texto">
                                     <strong>Clínica Geral</strong>
                                     <span class="opcao-descricao">Atenção básica e geral</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-especialidade="cardiologia">
-                                <i class="fas fa-heartbeat"></i>
+                            <div class="opcao-item" data-especialidade="cardiologia" role="option" tabindex="0" aria-label="Cardiologia - Coração e circulação">
+                                <i class="fas fa-heartbeat" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>Cardiologia</strong>
                                     <span class="opcao-descricao">Coração e circulação</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-especialidade="dermatologia">
-                                <i class="fas fa-allergies"></i>
+                            <div class="opcao-item" data-especialidade="dermatologia" role="option" tabindex="0" aria-label="Dermatologia - Pele e cabelos">
+                                <i class="fas fa-allergies" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>Dermatologia</strong>
                                     <span class="opcao-descricao">Pele e cabelos</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-especialidade="ginecologia">
-                                <i class="fas fa-female"></i>
+                            <div class="opcao-item" data-especialidade="ginecologia" role="option" tabindex="0" aria-label="Ginecologia - Saúde feminina">
+                                <i class="fas fa-female" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>Ginecologia</strong>
                                     <span class="opcao-descricao">Saúde feminina</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-especialidade="pediatria">
-                                <i class="fas fa-baby"></i>
+                            <div class="opcao-item" data-especialidade="pediatria" role="option" tabindex="0" aria-label="Pediatria - Crianças e adolescentes">
+                                <i class="fas fa-baby" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>Pediatria</strong>
                                     <span class="opcao-descricao">Crianças e adolescentes</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-especialidade="ortopedia">
-                                <i class="fas fa-bone"></i>
+                            <div class="opcao-item" data-especialidade="ortopedia" role="option" tabindex="0" aria-label="Ortopedia - Ossos e articulações">
+                                <i class="fas fa-bone" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>Ortopedia</strong>
                                     <span class="opcao-descricao">Ossos e articulações</span>
@@ -149,55 +150,55 @@
                         </div>
                     </div>
                     <div class="botoes-navegacao">
-                        <button class="btn" id="btn-proximo-especialidade" disabled>
-                            <i class="fas fa-arrow-right"></i> Próxima Etapa
+                        <button class="btn" id="btn-proximo-especialidade" disabled aria-label="Ir para próxima etapa - Seleção de unidade">
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i> Próxima Etapa
                         </button>
                     </div>
                 </div>
                 
                 <!-- Etapa 2: Unidade de Saúde -->
-                <div id="passo-unidade" class="passo-agendamento" style="display: none;">
+                <div id="passo-unidade" class="passo-agendamento" style="display: none;" aria-labelledby="titulo-unidade" role="region">
                     <div class="card etapa-card">
-                        <h2 class="card-titulo">
-                            <i class="fas fa-hospital"></i> Selecione a Unidade de Saúde
+                        <h2 class="card-titulo" id="titulo-unidade">
+                            <i class="fas fa-hospital" aria-hidden="true"></i> Selecione a Unidade de Saúde
                         </h2>
                         <div class="form-group">
                             <div class="search-container">
-                                <i class="fas fa-search search-icon"></i>
-                                <input type="text" id="busca-unidade" class="form-input" placeholder="Buscar unidade de saúde...">
+                                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                                <input type="text" id="busca-unidade" class="form-input" placeholder="Buscar unidade de saúde..." aria-label="Buscar unidade de saúde">
                             </div>
                         </div>
-                        <div class="opcoes-lista" id="lista-unidades">
-                            <div class="opcao-item" data-unidade="usf-centro">
-                                <i class="fas fa-clinic-medical"></i>
+                        <div class="opcoes-lista" id="lista-unidades" role="listbox" aria-labelledby="titulo-unidade">
+                            <div class="opcao-item" data-unidade="usf-centro" role="option" tabindex="0" aria-label="USF Centro - Unidade de Saúde da Família Centro">
+                                <i class="fas fa-clinic-medical" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>USF Centro</strong>
                                     <span class="opcao-descricao">Unidade de Saúde da Família Centro</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-unidade="usf-norte">
-                                <i class="fas fa-clinic-medical"></i>
+                            <div class="opcao-item" data-unidade="usf-norte" role="option" tabindex="0" aria-label="USF Zona Norte - Unidade de Saúde da Família Zona Norte">
+                                <i class="fas fa-clinic-medical" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>USF Zona Norte</strong>
                                     <span class="opcao-descricao">Unidade de Saúde da Família Zona Norte</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-unidade="usf-sul">
-                                <i class="fas fa-clinic-medical"></i>
+                            <div class="opcao-item" data-unidade="usf-sul" role="option" tabindex="0" aria-label="USF Zona Sul - Unidade de Saúde da Família Zona Sul">
+                                <i class="fas fa-clinic-medical" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>USF Zona Sul</strong>
                                     <span class="opcao-descricao">Unidade de Saúde da Família Zona Sul</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-unidade="usf-leste">
-                                <i class="fas fa-clinic-medical"></i>
+                            <div class="opcao-item" data-unidade="usf-leste" role="option" tabindex="0" aria-label="USF Zona Leste - Unidade de Saúde da Família Zona Leste">
+                                <i class="fas fa-clinic-medical" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>USF Zona Leste</strong>
                                     <span class="opcao-descricao">Unidade de Saúde da Família Zona Leste</span>
                                 </div>
                             </div>
-                            <div class="opcao-item" data-unidade="usf-oeste">
-                                <i class="fas fa-clinic-medical"></i>
+                            <div class="opcao-item" data-unidade="usf-oeste" role="option" tabindex="0" aria-label="USF Zona Oeste - Unidade de Saúde da Família Zona Oeste">
+                                <i class="fas fa-clinic-medical" aria-hidden="true"></i>
                                 <div class="opcao-texto">
                                     <strong>USF Zona Oeste</strong>
                                     <span class="opcao-descricao">Unidade de Saúde da Família Zona Oeste</span>
@@ -206,27 +207,27 @@
                         </div>
                     </div>
                     <div class="botoes-navegacao">
-                        <button class="btn btn-secundario" id="btn-voltar-unidade">
-                            <i class="fas fa-arrow-left"></i> Voltar
+                        <button class="btn btn-secundario" id="btn-voltar-unidade" aria-label="Voltar para etapa anterior - Seleção de especialidade">
+                            <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar
                         </button>
-                        <button class="btn" id="btn-proximo-unidade" disabled>
-                            <i class="fas fa-arrow-right"></i> Próxima Etapa
+                        <button class="btn" id="btn-proximo-unidade" disabled aria-label="Ir para próxima etapa - Seleção de data e horário">
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i> Próxima Etapa
                         </button>
                     </div>
                 </div>
                 
                 <!-- Etapa 3: Data e Horário -->
-                <div id="passo-data-horario" class="passo-agendamento" style="display: none;">
+                <div id="passo-data-horario" class="passo-agendamento" style="display: none;" aria-labelledby="titulo-data-horario" role="region">
                     <div class="card etapa-card">
-                        <h2 class="card-titulo">
-                            <i class="fas fa-calendar-day"></i> Selecione a Data e Horário
+                        <h2 class="card-titulo" id="titulo-data-horario">
+                            <i class="fas fa-calendar-day" aria-hidden="true"></i> Selecione a Data e Horário
                         </h2>
                         
                         <div class="form-group">
                             <label class="form-label" for="mes-calendario">
-                                <i class="fas fa-calendar-alt"></i> Mês:
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i> Mês:
                             </label>
-                            <select id="mes-calendario" class="form-select">
+                            <select id="mes-calendario" class="form-select" aria-label="Selecionar mês para agendamento">
                                 <option value="0">Janeiro</option>
                                 <option value="1">Fevereiro</option>
                                 <option value="2">Março</option>
@@ -246,100 +247,99 @@
                             <table class="calendario" aria-label="Calendário de agendamento">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Dom</th>
-                                        <th scope="col">Seg</th>
-                                        <th scope="col">Ter</th>
-                                        <th scope="col">Qua</th>
-                                        <th scope="col">Qui</th>
-                                        <th scope="col">Sex</th>
-                                        <th scope="col">Sáb</th>
+                                        <th scope="col">Domingo</th>
+                                        <th scope="col">Segunda</th>
+                                        <th scope="col">Terça</th>
+                                        <th scope="col">Quarta</th>
+                                        <th scope="col">Quinta</th>
+                                        <th scope="col">Sexta</th>
+                                        <th scope="col">Sábado</th>
                                     </tr>
                                 </thead>
                                 <tbody id="corpo-calendario">
-                                    <!-- O calendário será preenchido via JavaScript -->
                                 </tbody>
                             </table>
                         </div>
                         
-                        <div id="selecao-horarios" style="display: none; margin-top: 2rem;">
-                            <h3><i class="fas fa-clock"></i> Horários Disponíveis</h3>
-                            <div class="horarios-lista" id="lista-horarios">
+                        <div id="selecao-horarios" style="display: none; margin-top: 2rem;" aria-labelledby="titulo-horarios">
+                            <h3 id="titulo-horarios"><i class="fas fa-clock" aria-hidden="true"></i> Horários Disponíveis</h3>
+                            <div class="horarios-lista" id="lista-horarios" role="listbox" aria-labelledby="titulo-horarios">
                                 <!-- Os horários serão preenchidos via JavaScript -->
                             </div>
                         </div>
                     </div>
                     <div class="botoes-navegacao">
-                        <button class="btn btn-secundario" id="btn-voltar-data">
-                            <i class="fas fa-arrow-left"></i> Voltar
+                        <button class="btn btn-secundario" id="btn-voltar-data" aria-label="Voltar para etapa anterior - Seleção de unidade">
+                            <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar
                         </button>
-                        <button class="btn" id="btn-proximo-data" disabled>
-                            <i class="fas fa-arrow-right"></i> Próxima Etapa
+                        <button class="btn" id="btn-proximo-data" disabled aria-label="Ir para próxima etapa - Confirmação do agendamento">
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i> Próxima Etapa
                         </button>
                     </div>
                 </div>
                 
                 <!-- Etapa 4: Confirmação -->
-                <div id="passo-confirmacao" class="passo-agendamento" style="display: none;">
+                <div id="passo-confirmacao" class="passo-agendamento" style="display: none;" aria-labelledby="titulo-confirmacao" role="region">
                     <div class="card etapa-card">
-                        <h2 class="card-titulo">
-                            <i class="fas fa-check-circle"></i> Confirme seu Agendamento
+                        <h2 class="card-titulo" id="titulo-confirmacao">
+                            <i class="fas fa-check-circle" aria-hidden="true"></i> Confirme seu Agendamento
                         </h2>
                         
-                        <div class="resumo-consulta">
+                        <div class="resumo-consulta" aria-labelledby="titulo-confirmacao">
                             <div class="resumo-item">
                                 <div class="resumo-label">
-                                    <i class="fas fa-user-md"></i> Especialidade:
+                                    <i class="fas fa-user-md" aria-hidden="true"></i> Especialidade:
                                 </div>
                                 <div id="resumo-especialidade" class="resumo-valor">-</div>
                             </div>
                             
                             <div class="resumo-item">
                                 <div class="resumo-label">
-                                    <i class="fas fa-hospital"></i> Unidade de Saúde:
+                                    <i class="fas fa-hospital" aria-hidden="true"></i> Unidade de Saúde:
                                 </div>
                                 <div id="resumo-unidade" class="resumo-valor">-</div>
                             </div>
                             
                             <div class="resumo-item">
                                 <div class="resumo-label">
-                                    <i class="fas fa-calendar-alt"></i> Data:
+                                    <i class="fas fa-calendar-alt" aria-hidden="true"></i> Data:
                                 </div>
                                 <div id="resumo-data" class="resumo-valor">-</div>
                             </div>
                             
                             <div class="resumo-item">
                                 <div class="resumo-label">
-                                    <i class="fas fa-clock"></i> Horário:
+                                    <i class="fas fa-clock" aria-hidden="true"></i> Horário:
                                 </div>
                                 <div id="resumo-horario" class="resumo-valor">-</div>
                             </div>
                         </div>
                     </div>
                     <div class="botoes-navegacao">
-                        <button class="btn btn-secundario" id="btn-voltar-confirmacao">
-                            <i class="fas fa-arrow-left"></i> Voltar
+                        <button class="btn btn-secundario" id="btn-voltar-confirmacao" aria-label="Voltar para etapa anterior - Seleção de data e horário">
+                            <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar
                         </button>
-                        <button class="btn" id="btn-confirmar-agendamento">
-                            <i class="fas fa-check"></i> Confirmar Agendamento
+                        <button class="btn" id="btn-confirmar-agendamento" aria-label="Confirmar agendamento da consulta">
+                            <i class="fas fa-check" aria-hidden="true"></i> Confirmar Agendamento
                         </button>
                     </div>
                 </div>
                 
                 <!-- Mensagem de sucesso -->
-                <div id="mensagem-sucesso" class="mensagem-sucesso" style="display: none;" aria-live="assertive">
-                    <div class="sucesso-icon">
-                        <i class="fas fa-check-circle"></i>
+                <div id="mensagem-sucesso" class="mensagem-sucesso" style="display: none;" aria-live="assertive" aria-labelledby="titulo-sucesso">
+                    <div class="sucesso-icon" aria-hidden="true">
+                        <i class="fas fa-check-circle" aria-hidden="true"></i>
                     </div>
-                    <h2>Agendamento Confirmado!</h2>
+                    <h2 id="titulo-sucesso">Agendamento Confirmado!</h2>
                     <p>Seu agendamento foi realizado com sucesso.</p>
                     <p>Você receberá uma confirmação por SMS.</p>
                     
                     <div class="botoes-finais">
-                        <button class="btn" id="btn-novo-agendamento">
-                            <i class="fas fa-calendar-plus"></i> Fazer Novo Agendamento
+                        <button class="btn" id="btn-novo-agendamento" aria-label="Fazer novo agendamento de consulta">
+                            <i class="fas fa-calendar-plus" aria-hidden="true"></i> Fazer Novo Agendamento
                         </button>
-                        <a href="index.html" class="btn btn-inicio">
-                            <i class="fas fa-home"></i> Voltar ao Início
+                        <a href="index.html" class="btn btn-inicio" aria-label="Voltar para página inicial">
+                            <i class="fas fa-home" aria-hidden="true"></i> Voltar ao Início
                         </a>
                     </div>
                 </div>
@@ -348,22 +348,22 @@
     </main>
 
     <!-- Rodapé -->
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-container">
             <div class="footer-info">
-                <p><i class="fas fa-stethoscope"></i> Sistema de Agendamento SUS+</p>
-                <p><i class="fas fa-phone"></i> Atendimento ao Cidadão: 136</p>
-                <p><i class="fas fa-info-circle"></i> Serviço gratuito do Ministério da Saúde</p>
+                <p><i class="fas fa-stethoscope" aria-hidden="true"></i> Sistema de Agendamento SUS+</p>
+                <p><i class="fas fa-phone" aria-hidden="true"></i> Atendimento ao Cidadão: 136</p>
+                <p><i class="fas fa-info-circle" aria-hidden="true"></i> Serviço gratuito do Ministério da Saúde</p>
             </div>
             <div class="footer-links">
-                <a href="#" class="footer-link">
-                    <i class="fas fa-question-circle"></i> Ajuda
+                <a href="#" class="footer-link" aria-label="Acessar página de ajuda">
+                    <i class="fas fa-question-circle" aria-hidden="true"></i> Ajuda
                 </a>
-                <a href="#" class="footer-link">
-                    <i class="fas fa-shield-alt"></i> Privacidade
+                <a href="#" class="footer-link" aria-label="Acessar política de privacidade">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i> Privacidade
                 </a>
-                <a href="#" class="footer-link">
-                    <i class="fas fa-file-alt"></i> Termos de Uso
+                <a href="#" class="footer-link" aria-label="Acessar termos de uso">
+                    <i class="fas fa-file-alt" aria-hidden="true"></i> Termos de Uso
                 </a>
             </div>
         </div>
@@ -371,7 +371,7 @@
 
     <!-- Script VLibras -->
     <div vw class="enabled">
-        <div vw-access-button class="active"></div>
+        <div vw-access-button class="active" aria-label="Acessibilidade em Libras"></div>
         <div vw-plugin-wrapper>
             <div class="vw-plugin-top-wrapper"></div>
         </div>
@@ -387,8 +387,8 @@
     <script src="js/main.js"></script>
     <script src="js/agendar.js"></script>
 
-        <!-- Filtro para daltonismo-->
-    <svg width="0" height="0">
+    <!-- Filtro para daltonismo-->
+    <svg width="0" height="0" aria-hidden="true">
         <filter id="protanopia">
             <feColorMatrix type="matrix" values="
                 0.567 0.433 0      0 0

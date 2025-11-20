@@ -4,73 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUS+ - Minha Agenda</title>
+    <meta name="description" content="Minha agenda de consultas do SUS - Veja, cancele ou remarcar suas consultas agendadas">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/minha-agenda.css">
 </head>
-<body>
+<body role="document" aria-label="Página Minha Agenda do Sistema de Agendamento SUS+">
     <!-- Cabeçalho -->
-    <header>
+    <header role="banner">
         <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-stethoscope"></i> Agendamento SUS+
+            <div class="logo" aria-label="Sistema de Agendamento SUS+">
+                <i class="fas fa-stethoscope" aria-hidden="true"></i> Agendamento SUS+
             </div>
-            <nav class="nav-menu">
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-home"></i> Início
+            <nav class="nav-menu" aria-label="Navegação principal">
+                <a href="index.html" class="nav-link" aria-label="Página inicial">
+                    <i class="fas fa-home" aria-hidden="true"></i> Início
                 </a>
-                <a href="agendar.html" class="nav-link">
-                    <i class="fas fa-calendar-plus"></i> Agendar
+                <a href="agendar.html" class="nav-link" aria-label="Agendar nova consulta">
+                    <i class="fas fa-calendar-plus" aria-hidden="true"></i> Agendar
                 </a>
-                <a href="minha-agenda.html" class="nav-link">
-                    <i class="fas fa-calendar-alt"></i> Minha Agenda
+                <a href="minha-agenda.html" class="nav-link" aria-current="page" aria-label="Minha agenda de consultas">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i> Minha Agenda
                 </a>
             </nav>
             <button class="fonte-btn" id="btn-acessibilidade" aria-label="Aumentar tamanho da fonte">
-                <i class="fas fa-font"></i> A+
+                <i class="fas fa-font" aria-hidden="true"></i> A+
             </button>
             <button class="daltonismo-btn" id="btn-daltonismo" aria-label="Ativar modo de daltonismo">
-                <i class="fas fa-eye"></i> Daltonismo
+                <i class="fas fa-eye" aria-hidden="true"></i> Daltonismo
             </button>
         </div>
     </header>
 
     <!-- Conteúdo Principal -->
-    <main>
-        <section id="minha-agenda">
-            <h1>Minha Agenda</h1>
+    <main role="main" aria-labelledby="titulo-principal">
+        <section id="minha-agenda" aria-labelledby="titulo-principal">
+            <h1 id="titulo-principal">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                Minha Agenda
+            </h1>
             
-            <div class="card">
-                <h2 class="card-titulo">Consultas Agendadas</h2>
-                <p id="mensagem-sem-consultas">Você não tem consultas agendadas no momento.</p>
+            <div class="card" role="region" aria-labelledby="titulo-consultas">
+                <h2 id="titulo-consultas" class="card-titulo">
+                    <i class="fas fa-list-alt" aria-hidden="true"></i>
+                    Consultas Agendadas
+                </h2>
                 
-                <div id="lista-consultas" style="display: none;">
+                <div id="status-consultas" aria-live="polite" aria-atomic="true">
+                    <p id="mensagem-sem-consultas" class="mensagem-status">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                        Você não tem consultas agendadas no momento.
+                    </p>
+                </div>
+                
+                <div id="lista-consultas" style="display: none;" role="list" aria-label="Lista de consultas agendadas">
                     <!-- As consultas serão preenchidas via JavaScript -->
                 </div>
                 
                 <div class="botoes-finais">
-                    <a href="index.html" class="btn btn-inicio">Voltar ao Início</a>
+                    <a href="index.html" class="btn btn-inicio" aria-label="Voltar para página inicial">
+                        <i class="fas fa-home" aria-hidden="true"></i> Voltar ao Início
+                    </a>
                 </div>
             </div>
+
+            <!-- Seção de Ajuda -->
+            <section class="ajuda" aria-labelledby="titulo-ajuda">
+                <div class="card">
+                    <h2 id="titulo-ajuda" class="card-titulo">
+                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                        Precisa de Ajuda?
+                    </h2>
+                    <div class="info-ajuda">
+                        <div class="item-ajuda" aria-label="Telefone de atendimento ao cidadão: 136">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <span><strong>Atendimento:</strong> Ligue 136</span>
+                        </div>
+                        <div class="item-ajuda" aria-label="Cancelar consultas com 24 horas de antecedência">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                            <span><strong>Cancelamento:</strong> Com 24h de antecedência</span>
+                        </div>
+                        <div class="item-ajuda" aria-label="Levar documento de identidade e cartão do SUS">
+                            <i class="fas fa-id-card" aria-hidden="true"></i>
+                            <span><strong>Documentos:</strong> RG e Cartão SUS obrigatórios</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </section>
     </main>
 
     <!-- Rodapé -->
-<footer>
+    <footer role="contentinfo">
         <div class="footer-container">
             <div class="footer-info">
-                <p><i class="fas fa-stethoscope"></i> Sistema de Agendamento SUS+</p>
-                <p><i class="fas fa-phone"></i> Atendimento ao Cidadão: 136</p>
-                <p><i class="fas fa-info-circle"></i> Serviço gratuito do Ministério da Saúde</p>
+                <p><i class="fas fa-stethoscope" aria-hidden="true"></i> Sistema de Agendamento SUS+</p>
+                <p><i class="fas fa-phone" aria-hidden="true"></i> Atendimento ao Cidadão: 136</p>
+                <p><i class="fas fa-info-circle" aria-hidden="true"></i> Serviço gratuito do Ministério da Saúde</p>
             </div>
             <div class="footer-links">
-                <a href="#" class="footer-link">
-                    <i class="fas fa-question-circle"></i> Ajuda
+                <a href="#" class="footer-link" aria-label="Acessar página de ajuda">
+                    <i class="fas fa-question-circle" aria-hidden="true"></i> Ajuda
                 </a>
-                <a href="#" class="footer-link">
-                    <i class="fas fa-shield-alt"></i> Privacidade
+                <a href="#" class="footer-link" aria-label="Acessar política de privacidade">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i> Privacidade
                 </a>
-                <a href="#" class="footer-link">
-                    <i class="fas fa-file-alt"></i> Termos de Uso
+                <a href="#" class="footer-link" aria-label="Acessar termos de uso">
+                    <i class="fas fa-file-alt" aria-hidden="true"></i> Termos de Uso
                 </a>
             </div>
         </div>
@@ -78,11 +118,12 @@
 
     <!-- Script VLibras -->
     <div vw class="enabled">
-        <div vw-access-button class="active"></div>
+        <div vw-access-button class="active" aria-label="Acessibilidade em Libras - Tradutor para Língua Brasileira de Sinais"></div>
         <div vw-plugin-wrapper>
             <div class="vw-plugin-top-wrapper"></div>
         </div>
     </div>
+
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
@@ -91,5 +132,24 @@
     <!-- Scripts da aplicação -->
     <script src="js/main.js"></script>
     <script src="js/minha-agenda.js"></script>
+
+    <!-- Filtro para daltonismo -->
+    <svg width="0" height="0" aria-hidden="true">
+        <filter id="protanopia">
+            <feColorMatrix type="matrix" values="
+                0.567 0.433 0      0 0
+                0.558 0.442 0      0 0
+                0      0.242 0.758 0 0
+                0      0      0      1 0" />
+        </filter>
+
+        <filter id="tritanopia">
+            <feColorMatrix type="matrix" values="
+                0.95  0.05  0      0 0
+                0      0.433 0.567 0 0
+                0      0.475 0.525 0 0
+                0      0      0      1 0" />
+        </filter>
+    </svg>
 </body>
 </html>

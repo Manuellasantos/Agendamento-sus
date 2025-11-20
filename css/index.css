@@ -1,7 +1,30 @@
 body{
     background-image: url(https://blog.samisaude.com.br/wp-content/uploads/2021/07/cartao-nacional-de-saude.png);
 }
+.informacoes {
+    margin-top: 2rem;
+}
 
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.info-item i {
+    color: var(--azul-sus);
+    width: 20px;
+    text-align: center;
+}
 /* Container de cartões do dashboard */
 .cartoes-container {
     display: grid;
@@ -18,6 +41,9 @@ body{
     transition: all 0.3s ease;
 }
 
+.card {
+    margin: 0 20px 10px 20px;
+}
 .cartoes-container .card:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
