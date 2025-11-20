@@ -1,412 +1,437 @@
-// Elementos do fluxo de agendamento
-const etapas = document.querySelectorAll('.etapa');
-const passosAgendamento = document.querySelectorAll('.passo-agendamento');
-const listaEspecialidades = document.getElementById('lista-especialidades');
-const btnProximoEspecialidade = document.getElementById('btn-proximo-especialidade');
-const btnVoltarUnidade = document.getElementById('btn-voltar-unidade');
-const btnProximoUnidade = document.getElementById('btn-proximo-unidade');
-const btnVoltarData = document.getElementById('btn-voltar-data');
-const btnProximoData = document.getElementById('btn-proximo-data');
-const btnVoltarConfirmacao = document.getElementById('btn-voltar-confirmacao');
-const btnConfirmarAgendamento = document.getElementById('btn-confirmar-agendamento');
-const btnNovoAgendamento = document.getElementById('btn-novo-agendamento');
-const mensagemSucesso = document.getElementById('mensagem-sucesso');
+// Variáveis globais para armazenar seleções
+let especialidadeSelecionada = null;
+let unidadeSelecionada = null;
+let dataSelecionada = null;
+let horarioSelecionado = null;
 
-// Dados do agendamento
-let dadosAgendamento = {
-    especialidade: null,
-    unidade: null,
-    data: null,
-    horario: null
-};
-
-// Inicialização do agendamento
+// Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
-    if (listaEspecialidades) {
-        iniciarAgendamento();
-    }
+    inicializarAgendamento();
+    
+    // Esconde o calendário inicialmente
+    document.getElementById('corpo-calendario').innerHTML = `
+        <tr>
+            <td colspan="7" style="text-align: center; padding: 2rem; color: #666;">
+                Selecione um mês para ver o calendário
+            </td>
+        </tr>
+    `;
+    
+    // Esconde a seleção de horários
+    document.getElementById('selecao-horarios').style.display = 'none';
 });
 
-function iniciarAgendamento() {
-    // Configurar fluxo de agendamento - Etapa 1: Especialidade
-    listaEspecialidades.querySelectorAll('.opcao-item').forEach(item => {
-        item.addEventListener('click', function() {
-            // Remover seleção anterior
-            listaEspecialidades.querySelectorAll('.opcao-item').forEach(i => {
-                i.classList.remove('selecionado');
-            });
-            
-            // Selecionar atual
-            this.classList.add('selecionado');
-            dadosAgendamento.especialidade = this.getAttribute('data-especialidade');
-            
-            // Ativar botão próximo
-            btnProximoEspecialidade.disabled = false;
-        });
-        
-        // Permitir seleção por teclado
-        item.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                this.click();
-            }
+function inicializarAgendamento() {
+    // Event listeners para especialidades
+    const opcoesEspecialidades = document.querySelectorAll('#lista-especialidades .opcao-item');
+    opcoesEspecialidades.forEach(opcao => {
+        opcao.addEventListener('click', function() {
+            selecionarEspecialidade(this);
         });
     });
-    
-    btnProximoEspecialidade.addEventListener('click', function() {
-        // Atualizar etapas
-        etapas[0].classList.remove('ativa');
-        etapas[0].classList.add('concluida');
-        etapas[1].classList.add('ativa');
-        
-        // Mostrar próximo passo
-        passosAgendamento[0].style.display = 'none';
-        passosAgendamento[1].style.display = 'block';
+
+    // Event listeners para unidades
+    const opcoesUnidades = document.querySelectorAll('#lista-unidades .opcao-item');
+    opcoesUnidades.forEach(opcao => {
+        opcao.addEventListener('click', function() {
+            selecionarUnidade(this);
+        });
     });
-    
-    // Configurar fluxo de agendamento - Etapa 2: Unidade
-    const listaUnidades = document.getElementById('lista-unidades');
+
+    // Navegação entre etapas
+    document.getElementById('btn-proximo-especialidade').addEventListener('click', avancarParaUnidade);
+    document.getElementById('btn-voltar-unidade').addEventListener('click', voltarParaEspecialidade);
+    document.getElementById('btn-proximo-unidade').addEventListener('click', avancarParaDataHorario);
+    document.getElementById('btn-voltar-data').addEventListener('click', voltarParaUnidade);
+    document.getElementById('btn-proximo-data').addEventListener('click', avancarParaConfirmacao);
+    document.getElementById('btn-voltar-confirmacao').addEventListener('click', voltarParaDataHorario);
+    document.getElementById('btn-confirmar-agendamento').addEventListener('click', confirmarAgendamento);
+    document.getElementById('btn-novo-agendamento').addEventListener('click', reiniciarAgendamento);
+
+    // Event listener para mudança de mês no calendário - AGORA CRIA O CALENDÁRIO
+    document.getElementById('mes-calendario').addEventListener('change', function() {
+        const mes = parseInt(this.value);
+        const ano = new Date().getFullYear();
+        criarCalendario(mes, ano);
+    });
+
+    // Configurar busca de unidades
     const buscaUnidade = document.getElementById('busca-unidade');
-    
-    if (listaUnidades) {
-        listaUnidades.querySelectorAll('.opcao-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // Remover seleção anterior
-                listaUnidades.querySelectorAll('.opcao-item').forEach(i => {
-                    i.classList.remove('selecionado');
-                });
-                
-                // Selecionar atual
-                this.classList.add('selecionado');
-                dadosAgendamento.unidade = this.getAttribute('data-unidade');
-                
-                // Ativar botão próximo
-                btnProximoUnidade.disabled = false;
-            });
-            
-            // Permitir seleção por teclado
-            item.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
-            });
-        });
-    }
-    
-    // Filtro de busca para unidades
     if (buscaUnidade) {
         buscaUnidade.addEventListener('input', function() {
-            const termo = this.value.toLowerCase();
-            
-            listaUnidades.querySelectorAll('.opcao-item').forEach(item => {
-                const texto = item.textContent.toLowerCase();
-                if (texto.includes(termo)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            filtrarUnidades(this.value.toLowerCase());
         });
     }
-    
-    btnVoltarUnidade.addEventListener('click', function() {
-        // Atualizar etapas
-        etapas[1].classList.remove('ativa');
-        etapas[0].classList.remove('concluida');
-        etapas[0].classList.add('ativa');
-        
-        // Mostrar passo anterior
-        passosAgendamento[1].style.display = 'none';
-        passosAgendamento[0].style.display = 'block';
-    });
-    
-    btnProximoUnidade.addEventListener('click', function() {
-        // Atualizar etapas
-        etapas[1].classList.remove('ativa');
-        etapas[1].classList.add('concluida');
-        etapas[2].classList.add('ativa');
-        
-        // Mostrar próximo passo
-        passosAgendamento[1].style.display = 'none';
-        passosAgendamento[2].style.display = 'block';
-        
-        // Gerar calendário
-        gerarCalendario();
-    });
-    
-    // Configurar fluxo de agendamento - Etapa 3: Data e Horário
-    btnVoltarData.addEventListener('click', function() {
-        // Atualizar etapas
-        etapas[2].classList.remove('ativa');
-        etapas[1].classList.remove('concluida');
-        etapas[1].classList.add('ativa');
-        
-        // Mostrar passo anterior
-        passosAgendamento[2].style.display = 'none';
-        passosAgendamento[1].style.display = 'block';
-    });
-    
-    btnProximoData.addEventListener('click', function() {
-        // Atualizar etapas
-        etapas[2].classList.remove('ativa');
-        etapas[2].classList.add('concluida');
-        etapas[3].classList.add('ativa');
-        
-        // Mostrar próximo passo
-        passosAgendamento[2].style.display = 'none';
-        passosAgendamento[3].style.display = 'block';
-        
-        // Preencher resumo
-        document.getElementById('resumo-especialidade').textContent = 
-            document.querySelector(`[data-especialidade="${dadosAgendamento.especialidade}"]`).textContent;
-        
-        document.getElementById('resumo-unidade').textContent = 
-            document.querySelector(`[data-unidade="${dadosAgendamento.unidade}"]`).textContent;
-        
-        document.getElementById('resumo-data').textContent = dadosAgendamento.data + '/06/2023';
-        document.getElementById('resumo-horario').textContent = dadosAgendamento.horario;
-    });
-    
-    // Configurar fluxo de agendamento - Etapa 4: Confirmação
-    btnVoltarConfirmacao.addEventListener('click', function() {
-        // Atualizar etapas
-        etapas[3].classList.remove('ativa');
-        etapas[2].classList.remove('concluida');
-        etapas[2].classList.add('ativa');
-        
-        // Mostrar passo anterior
-        passosAgendamento[3].style.display = 'none';
-        passosAgendamento[2].style.display = 'block';
-    });
-    
-    btnConfirmarAgendamento.addEventListener('click', function() {
-        // Aqui normalmente enviaríamos os dados para o servidor
-        
-        // Mostrar mensagem de sucesso
-        passosAgendamento[3].style.display = 'none';
-        mensagemSucesso.style.display = 'block';
-        
-        // Adicionar consulta à lista (salvar no localStorage)
-        adicionarConsultaAgendada();
-    });
-    
-    btnNovoAgendamento.addEventListener('click', function() {
-        // Reiniciar o processo de agendamento
-        reiniciarAgendamento();
-    });
 }
 
-// Função para gerar calendário
-function gerarCalendario() {
+// Função para criar o calendário - SÓ É CHAMADA QUANDO SELECIONA UM MÊS
+function criarCalendario(mes, ano) {
     const corpoCalendario = document.getElementById('corpo-calendario');
-    if (!corpoCalendario) return;
     
     corpoCalendario.innerHTML = '';
     
-    // Exemplo: gerar um calendário para o mês atual
-    const dataAtual = new Date();
-    const mesAtual = dataAtual.getMonth();
-    const anoAtual = dataAtual.getFullYear();
+    const primeiroDia = new Date(ano, mes, 1).getDay();
+    const ultimoDia = new Date(ano, mes + 1, 0).getDate();
     
-    // Primeiro dia do mês
-    const primeiroDia = new Date(anoAtual, mesAtual, 1);
-    // Último dia do mês
-    const ultimoDia = new Date(anoAtual, mesAtual + 1, 0);
-    
-    // Dias da semana do primeiro dia (0 = Domingo, 1 = Segunda, etc.)
-    const diaSemanaPrimeiro = primeiroDia.getDay();
-    
-    // Número de dias no mês
-    const numDias = ultimoDia.getDate();
-    
-    let data = 1;
-    let html = '';
+    let dia = 1;
     
     for (let i = 0; i < 6; i++) {
-        html += '<tr>';
+        const linha = document.createElement('tr');
         
         for (let j = 0; j < 7; j++) {
-            if (i === 0 && j < diaSemanaPrimeiro) {
-                html += '<td class="indisponivel"></td>';
-            } else if (data > numDias) {
-                html += '<td class="indisponivel"></td>';
+            const celula = document.createElement('td');
+            
+            if (i === 0 && j < primeiroDia) {
+                celula.className = 'vazia';
+                celula.innerHTML = '';
+            } else if (dia > ultimoDia) {
+                celula.className = 'vazia';
+                celula.innerHTML = '';
             } else {
-                // Marcar alguns dias como disponíveis (exemplo)
-                const disponivel = data % 3 !== 0; // Apenas para exemplo
+                // Todos os dias disponíveis
+                const disponivel = true;
+                
+                celula.textContent = dia;
+                celula.setAttribute('data-dia', dia);
+                celula.setAttribute('data-mes', mes);
+                celula.setAttribute('data-ano', ano);
                 
                 if (disponivel) {
-                    html += `<td class="disponivel" tabindex="0" data-dia="${data}">${data}</td>`;
+                    celula.className = 'data-disponivel';
+                    celula.setAttribute('tabindex', '0');
+                    
+                    celula.addEventListener('click', function() {
+                        selecionarData(this);
+                    });
+                    
+                    celula.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selecionarData(this);
+                        }
+                    });
                 } else {
-                    html += `<td class="indisponivel">${data}</td>`;
+                    celula.className = 'data-indisponivel';
+                    celula.setAttribute('tabindex', '-1');
                 }
                 
-                data++;
+                dia++;
             }
+            
+            linha.appendChild(celula);
         }
         
-        html += '</tr>';
+        corpoCalendario.appendChild(linha);
         
-        if (data > numDias) {
+        if (dia > ultimoDia) {
             break;
         }
     }
     
-    corpoCalendario.innerHTML = html;
+    // Reseta seleções quando muda de mês
+    resetarSelecoesDataHorario();
     
-    // Adicionar eventos aos dias disponíveis
-    corpoCalendario.querySelectorAll('.disponivel').forEach(dia => {
-        dia.addEventListener('click', selecionarData);
-        dia.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                selecionarData.call(this);
-            }
-        });
-    });
+    console.log(`Calendário de ${obterNomeMes(mes)} criado!`);
 }
 
-function selecionarData() {
-    // Remover seleção anterior
-    document.querySelectorAll('.disponivel').forEach(dia => {
-        dia.classList.remove('selecionado');
-    });
-    
-    // Selecionar data atual
-    this.classList.add('selecionado');
-    dadosAgendamento.data = this.getAttribute('data-dia');
-    
-    // Mostrar horários disponíveis
-    document.getElementById('selecao-horarios').style.display = 'block';
-    
-    // Gerar horários disponíveis
-    gerarHorarios();
+// Função auxiliar para obter nome do mês
+function obterNomeMes(mes) {
+    const meses = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    return meses[mes];
 }
 
-function gerarHorarios() {
-    const listaHorarios = document.getElementById('lista-horarios');
-    if (!listaHorarios) return;
-    
-    listaHorarios.innerHTML = '';
-    
-    // Horários de exemplo
-    const horarios = ['08:00', '09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
-    
-    horarios.forEach(horario => {
-        const div = document.createElement('div');
-        div.className = 'horario-item';
-        div.textContent = horario;
-        div.setAttribute('data-horario', horario);
-        div.setAttribute('tabindex', '0');
-        
-        div.addEventListener('click', selecionarHorario);
-        div.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                selecionarHorario.call(this);
-            }
-        });
-        
-        listaHorarios.appendChild(div);
-    });
-}
-
-function selecionarHorario() {
-    // Remover seleção anterior
-    document.querySelectorAll('.horario-item').forEach(horario => {
-        horario.classList.remove('selecionado');
-    });
-    
-    // Selecionar horário atual
-    this.classList.add('selecionado');
-    dadosAgendamento.horario = this.getAttribute('data-horario');
-    
-    // Ativar botão próximo
-    btnProximoData.disabled = false;
-}
-
-// Função para reiniciar o processo de agendamento
-function reiniciarAgendamento() {
-    // Mostrar primeiro passo
-    passosAgendamento.forEach(passo => {
-        passo.style.display = 'none';
-    });
-    passosAgendamento[0].style.display = 'block';
-    
-    // Reiniciar etapas
-    etapas.forEach(etapa => {
-        etapa.classList.remove('ativa', 'concluida');
-    });
-    etapas[0].classList.add('ativa');
-    
-    // Limpar dados
-    dadosAgendamento = {
-        especialidade: null,
-        unidade: null,
-        data: null,
-        horario: null
-    };
-    
-    // Limpar seleções
-    document.querySelectorAll('.opcao-item.selecionado, .disponivel.selecionado, .horario-item.selecionado').forEach(item => {
+// Função para selecionar especialidade
+function selecionarEspecialidade(elemento) {
+    document.querySelectorAll('#lista-especialidades .opcao-item').forEach(item => {
         item.classList.remove('selecionado');
     });
     
-    // Desativar botões
-    btnProximoEspecialidade.disabled = true;
-    btnProximoUnidade.disabled = true;
-    btnProximoData.disabled = true;
-    
-    // Ocultar mensagem de sucesso
-    mensagemSucesso.style.display = 'none';
+    elemento.classList.add('selecionado');
+    especialidadeSelecionada = elemento.getAttribute('data-especialidade');
+    document.getElementById('btn-proximo-especialidade').disabled = false;
 }
 
-// Função para adicionar consulta à lista (salvar no localStorage)
-function adicionarConsultaAgendada() {
-    // Salvar consulta no localStorage
-    const consultas = JSON.parse(localStorage.getItem('consultasSUS') || '[]');
+// Função para selecionar unidade
+function selecionarUnidade(elemento) {
+    document.querySelectorAll('#lista-unidades .opcao-item').forEach(item => {
+        item.classList.remove('selecionado');
+    });
     
-    const novaConsulta = {
-        id: Date.now(),
-        especialidade: document.querySelector(`[data-especialidade="${dadosAgendamento.especialidade}"]`).textContent,
-        unidade: document.querySelector(`[data-unidade="${dadosAgendamento.unidade}"]`).textContent,
-        data: dadosAgendamento.data + '/06/2023',
-        horario: dadosAgendamento.horario,
-        timestamp: new Date().toISOString()
-    };
+    elemento.classList.add('selecionado');
+    unidadeSelecionada = elemento.getAttribute('data-unidade');
+    document.getElementById('btn-proximo-unidade').disabled = false;
+}
+
+// Função para filtrar unidades na busca
+function filtrarUnidades(termo) {
+    const unidades = document.querySelectorAll('#lista-unidades .opcao-item');
     
-    consultas.push(novaConsulta);
-    localStorage.setItem('consultasSUS', JSON.stringify(consultas));
+    unidades.forEach(unidade => {
+        const texto = unidade.textContent.toLowerCase();
+        if (texto.includes(termo)) {
+            unidade.style.display = 'flex';
+        } else {
+            unidade.style.display = 'none';
+        }
+    });
+}
+
+// Função para selecionar data
+function selecionarData(elemento) {
+    // Remove seleção anterior
+    document.querySelectorAll('.data-selecionada').forEach(data => {
+        data.classList.remove('data-selecionada');
+    });
     
-    // Atualizar dashboard se estiver na página inicial
-    const mensagemProximaConsulta = document.getElementById('mensagem-proxima-consulta');
-    if (mensagemProximaConsulta) {
-        const proximaConsulta = consultas.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))[0];
-        if (proximaConsulta) {
-            mensagemProximaConsulta.innerHTML = `
-                <strong>${proximaConsulta.especialidade}</strong><br>
-                Data: ${proximaConsulta.data}<br>
-                Horário: ${proximaConsulta.horario}<br>
-                Local: ${proximaConsulta.unidade}
-            `;
+    // Adiciona seleção atual
+    elemento.classList.add('data-selecionada');
+    
+    // Salva os dados
+    const dia = elemento.getAttribute('data-dia');
+    const mes = elemento.getAttribute('data-mes');
+    const ano = elemento.getAttribute('data-ano');
+    
+    dataSelecionada = { dia, mes, ano };
+    
+    // Mostra horários e atualiza
+    mostrarHorariosDisponiveis();
+    atualizarResumoData();
+    verificarCompletudeEtapa3();
+}
+
+// Função para mostrar horários disponíveis
+function mostrarHorariosDisponiveis() {
+    const containerHorarios = document.getElementById('selecao-horarios');
+    const listaHorarios = document.getElementById('lista-horarios');
+    
+    listaHorarios.innerHTML = '';
+    
+    const horariosDisponiveis = ['08:00', '09:00', '10:00', '14:00', '15:00', '16:00'];
+    
+    horariosDisponiveis.forEach(horario => {
+        const horarioElement = document.createElement('div');
+        horarioElement.className = 'horario-disponivel';
+        horarioElement.textContent = horario;
+        horarioElement.setAttribute('data-horario', horario);
+        horarioElement.setAttribute('tabindex', '0');
+        
+        horarioElement.addEventListener('click', function() {
+            selecionarHorario(this, horario);
+        });
+        
+        horarioElement.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selecionarHorario(this, horario);
+            }
+        });
+        
+        listaHorarios.appendChild(horarioElement);
+    });
+    
+    containerHorarios.style.display = 'block';
+    horarioSelecionado = null;
+    document.getElementById('btn-proximo-data').disabled = true;
+}
+
+// Função para selecionar horário
+function selecionarHorario(elemento, horario) {
+    // Remove seleção anterior
+    document.querySelectorAll('.horario-selecionado').forEach(h => {
+        h.classList.remove('horario-selecionado');
+        h.classList.add('horario-disponivel');
+    });
+    
+    // Adiciona seleção atual
+    elemento.classList.remove('horario-disponivel');
+    elemento.classList.add('horario-selecionado');
+    horarioSelecionado = horario;
+    
+    atualizarResumoHorario();
+    verificarCompletudeEtapa3();
+}
+
+// Função para verificar se etapa 3 está completa
+function verificarCompletudeEtapa3() {
+    const btnProximoData = document.getElementById('btn-proximo-data');
+    btnProximoData.disabled = !(dataSelecionada && horarioSelecionado);
+}
+
+// Função para atualizar resumo da data
+function atualizarResumoData() {
+    const resumoData = document.getElementById('resumo-data');
+    if (resumoData && dataSelecionada) {
+        const { dia, mes, ano } = dataSelecionada;
+        const dataObj = new Date(ano, mes, dia);
+        resumoData.textContent = dataObj.toLocaleDateString('pt-BR', {
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric'
+        });
+    }
+}
+
+// Função para atualizar resumo do horário
+function atualizarResumoHorario() {
+    const resumoHorario = document.getElementById('resumo-horario');
+    if (resumoHorario && horarioSelecionado) {
+        resumoHorario.textContent = horarioSelecionado;
+    }
+}
+
+// Função para resetar seleções
+function resetarSelecoesDataHorario() {
+    dataSelecionada = null;
+    horarioSelecionado = null;
+    
+    document.querySelectorAll('.data-selecionada').forEach(el => {
+        el.classList.remove('data-selecionada');
+    });
+    
+    document.querySelectorAll('.horario-selecionado').forEach(el => {
+        el.classList.remove('horario-selecionado');
+        el.classList.add('horario-disponivel');
+    });
+    
+    const containerHorarios = document.getElementById('selecao-horarios');
+    if (containerHorarios) {
+        containerHorarios.style.display = 'none';
+    }
+    
+    document.getElementById('btn-proximo-data').disabled = true;
+}
+
+// Funções de navegação entre etapas
+function avancarParaUnidade() {
+    document.getElementById('passo-especialidade').style.display = 'none';
+    document.getElementById('passo-unidade').style.display = 'block';
+    atualizarEtapaAtiva(2);
+}
+
+function voltarParaEspecialidade() {
+    document.getElementById('passo-unidade').style.display = 'none';
+    document.getElementById('passo-especialidade').style.display = 'block';
+    atualizarEtapaAtiva(1);
+}
+
+function avancarParaDataHorario() {
+    document.getElementById('passo-unidade').style.display = 'none';
+    document.getElementById('passo-data-horario').style.display = 'block';
+    atualizarEtapaAtiva(3);
+    
+    // Quando chega na etapa 3, já cria o calendário do mês atual
+    const hoje = new Date();
+    const mesAtual = hoje.getMonth();
+    const anoAtual = hoje.getFullYear();
+    
+    document.getElementById('mes-calendario').value = mesAtual;
+    criarCalendario(mesAtual, anoAtual);
+}
+
+function voltarParaUnidade() {
+    document.getElementById('passo-data-horario').style.display = 'none';
+    document.getElementById('passo-unidade').style.display = 'block';
+    atualizarEtapaAtiva(2);
+    resetarSelecoesDataHorario();
+}
+
+function avancarParaConfirmacao() {
+    document.getElementById('resumo-especialidade').textContent = 
+        document.querySelector('#lista-especialidades .opcao-item.selecionado .opcao-texto strong').textContent;
+    
+    document.getElementById('resumo-unidade').textContent = 
+        document.querySelector('#lista-unidades .opcao-item.selecionado .opcao-texto strong').textContent;
+    
+    atualizarResumoData();
+    atualizarResumoHorario();
+    
+    document.getElementById('passo-data-horario').style.display = 'none';
+    document.getElementById('passo-confirmacao').style.display = 'block';
+    atualizarEtapaAtiva(4);
+}
+
+function voltarParaDataHorario() {
+    document.getElementById('passo-confirmacao').style.display = 'none';
+    document.getElementById('passo-data-horario').style.display = 'block';
+    atualizarEtapaAtiva(3);
+}
+
+function confirmarAgendamento() {
+    console.log('Agendamento confirmado:', {
+        especialidade: especialidadeSelecionada,
+        unidade: unidadeSelecionada,
+        data: dataSelecionada,
+        horario: horarioSelecionado
+    });
+    
+    salvarAgendamento();
+    document.getElementById('passo-confirmacao').style.display = 'none';
+    document.getElementById('mensagem-sucesso').style.display = 'block';
+}
+
+function reiniciarAgendamento() {
+    especialidadeSelecionada = null;
+    unidadeSelecionada = null;
+    dataSelecionada = null;
+    horarioSelecionado = null;
+    
+    document.querySelectorAll('.selecionado, .data-selecionada, .horario-selecionado').forEach(el => {
+        el.classList.remove('selecionado', 'data-selecionada', 'horario-selecionado');
+    });
+    
+    document.getElementById('btn-proximo-especialidade').disabled = true;
+    document.getElementById('btn-proximo-unidade').disabled = true;
+    document.getElementById('btn-proximo-data').disabled = true;
+    
+    document.getElementById('mensagem-sucesso').style.display = 'none';
+    document.getElementById('passo-especialidade').style.display = 'block';
+    atualizarEtapaAtiva(1);
+    
+    document.getElementById('busca-unidade').value = '';
+    filtrarUnidades('');
+    
+    // Reseta o calendário para o estado inicial
+    document.getElementById('corpo-calendario').innerHTML = `
+        <tr>
+            <td colspan="7" style="text-align: center; padding: 2rem; color: #666;">
+                Selecione um mês para ver o calendário
+            </td>
+        </tr>
+    `;
+    document.getElementById('selecao-horarios').style.display = 'none';
+}
+
+function atualizarEtapaAtiva(etapa) {
+    document.querySelectorAll('.etapa').forEach(e => {
+        e.classList.remove('ativa', 'concluida');
+    });
+    
+    for (let i = 1; i <= 4; i++) {
+        const etapaElement = document.getElementById(`etapa${i}`);
+        if (i < etapa) {
+            etapaElement.classList.add('concluida');
+        } else if (i === etapa) {
+            etapaElement.classList.add('ativa');
         }
     }
 }
 
-// Função para atualizar o estado das etapas
-function atualizarEtapas(etapaAtual) {
-    const etapas = document.querySelectorAll('.etapa');
+function salvarAgendamento() {
+    const agendamentos = JSON.parse(localStorage.getItem('agendamentosSUS') || '[]');
     
-    etapas.forEach((etapa, index) => {
-        // Remove todas as classes de estado
-        etapa.classList.remove('ativa', 'concluida');
-        
-        // Adiciona classes baseadas na posição
-        if (index + 1 === etapaAtual) {
-            etapa.classList.add('ativa');
-        } else if (index + 1 < etapaAtual) {
-            etapa.classList.add('concluida');
-        }
-    });
+    const novoAgendamento = {
+        id: Date.now(),
+        especialidade: document.querySelector('#lista-especialidades .opcao-item.selecionado .opcao-texto strong').textContent,
+        unidade: document.querySelector('#lista-unidades .opcao-item.selecionado .opcao-texto strong').textContent,
+        data: dataSelecionada,
+        horario: horarioSelecionado,
+        dataAgendamento: new Date().toISOString()
+    };
+    
+    agendamentos.push(novoAgendamento);
+    localStorage.setItem('agendamentosSUS', JSON.stringify(agendamentos));
 }
-

@@ -1,4 +1,160 @@
-/* TAMANHOS REDUZIDOS E ESCALÁVEIS */
+/* ESTILOS DE ACESSIBILIDADE PARA A PÁGINA DE AGENDAMENTO */
+
+/* Fonte Ampliada */
+body.font-ampliada {
+    font-size: 1.2rem;
+}
+
+body.font-ampliada #agendar h1 {
+    font-size: 2.2rem !important;
+}
+
+body.font-ampliada .card-titulo {
+    font-size: 1.7rem !important;
+}
+
+body.font-ampliada .opcao-item {
+    font-size: 1.2rem !important;
+    padding: 1.4rem !important;
+    min-height: 85px !important;
+}
+
+body.font-ampliada .opcao-texto strong {
+    font-size: 1.3rem !important;
+}
+
+body.font-ampliada .opcao-descricao {
+    font-size: 1rem !important;
+}
+
+body.font-ampliada .etapa-texto {
+    font-size: 1rem !important;
+}
+
+body.font-ampliada .etapa-descricao {
+    font-size: 0.85rem !important;
+}
+
+body.font-ampliada .btn {
+    font-size: 1.2rem !important;
+    padding: 1rem 2.2rem !important;
+}
+
+body.font-ampliada .calendario {
+    font-size: 1.2rem !important;
+}
+
+body.font-ampliada .horario-item {
+    font-size: 1.2rem !important;
+    padding: 1.2rem 1rem !important;
+}
+
+body.font-ampliada .resumo-item {
+    font-size: 1.3rem !important;
+}
+
+body.font-ampliada .resumo-label {
+    font-size: 1.3rem !important;
+}
+
+body.font-ampliada .form-input,
+body.font-ampliada .form-select,
+body.font-ampliada .form-label {
+    font-size: 1.2rem !important;
+}
+
+/* Fonte Extra Ampliada */
+body.font-extra-ampliada {
+    font-size: 1.4rem;
+}
+
+body.font-extra-ampliada #agendar h1 {
+    font-size: 2.6rem !important;
+}
+
+body.font-extra-ampliada .card-titulo {
+    font-size: 2rem !important;
+}
+
+body.font-extra-ampliada .opcao-item {
+    font-size: 1.4rem !important;
+    padding: 1.6rem !important;
+    min-height: 100px !important;
+}
+
+body.font-extra-ampliada .opcao-texto strong {
+    font-size: 1.5rem !important;
+}
+
+body.font-extra-ampliada .opcao-descricao {
+    font-size: 1.1rem !important;
+}
+
+body.font-extra-ampliada .etapa-texto {
+    font-size: 1.1rem !important;
+}
+
+body.font-extra-ampliada .etapa-descricao {
+    font-size: 0.9rem !important;
+}
+
+body.font-extra-ampliada .btn {
+    font-size: 1.4rem !important;
+    padding: 1.2rem 2.4rem !important;
+}
+
+body.font-extra-ampliada .calendario {
+    font-size: 1.3rem !important;
+}
+
+body.font-extra-ampliada .horario-item {
+    font-size: 1.3rem !important;
+    padding: 1.4rem 1.2rem !important;
+}
+
+body.font-extra-ampliada .resumo-item {
+    font-size: 1.5rem !important;
+}
+
+body.font-extra-ampliada .resumo-label {
+    font-size: 1.5rem !important;
+}
+
+body.font-extra-ampliada .form-input,
+body.font-extra-ampliada .form-select,
+body.font-extra-ampliada .form-label {
+    font-size: 1.4rem !important;
+}
+
+/* Ajustes de layout para telas menores com fonte ampliada */
+@media (max-width: 768px) {
+    body.font-ampliada .etapas-container,
+    body.font-extra-ampliada .etapas-container {
+        margin-bottom: 2.5rem;
+    }
+    
+    body.font-ampliada #agendar .opcoes-lista,
+    body.font-extra-ampliada #agendar .opcoes-lista {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    body.font-ampliada .horarios-lista,
+    body.font-extra-ampliada .horarios-lista {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    
+    body.font-ampliada .etapa-numero,
+    body.font-extra-ampliada .etapa-numero {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    body.font-ampliada .etapa-numero i,
+    body.font-extra-ampliada .etapa-numero i {
+        font-size: 1.3rem !important;
+    }
+}
 
 /* Layout Expandido para Agendamento */
 #agendar {
@@ -511,4 +667,81 @@
     .resumo-label {
         min-width: auto;
     }
+}
+
+
+/* Estilos para datas e horários selecionados */
+.data-selecionada {
+    background: linear-gradient(135deg, var(--azul-sus) 0%, #0066cc 100%) !important;
+    color: white !important;
+    border: 2px solid var(--azul-sus) !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 79, 159, 0.3);
+    font-weight: bold;
+}
+
+.horario-selecionado {
+    background: linear-gradient(135deg, var(--azul-sus) 0%, #0066cc 100%) !important;
+    color: white !important;
+    border: 2px solid var(--azul-sus) !important;
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 79, 159, 0.25);
+    font-weight: bold;
+}
+
+/* Estados de hover mantidos mesmo quando selecionado */
+.data-selecionada:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004a99 100%) !important;
+    transform: scale(1.08);
+}
+
+.horario-selecionado:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004a99 100%) !important;
+    transform: scale(1.05);
+}
+
+/* Estilos base para elementos interativos */
+.data-disponivel {
+    background-color: #e8f5e8;
+    color: #2d5016;
+    border: 1px solid #c8e6c9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.data-disponivel:hover {
+    background-color: #c8e6c9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.horario-disponivel {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 1rem 0.8rem;
+    text-align: center;
+}
+
+.horario-disponivel:hover {
+    background-color: #e9ecef;
+    border-color: var(--azul-sus);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.data-indisponivel {
+    background-color: #f5f5f5;
+    color: #9e9e9e;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.vazia {
+    background-color: transparent;
+    border: none;
 }

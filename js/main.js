@@ -392,129 +392,112 @@ function adicionarConsultaAgendada() {
         }
     }
 }
-// Estado da aplicação
-let estadoFonte = 0; // 0: normal, 1: ampliada, 2: extra-ampliada
-
-// Elementos da interface
-const btnAcessibilidade = document.getElementById('btn-acessibilidade');
-
-// Configurar botão de acessibilidade
-if (btnAcessibilidade) {
-    btnAcessibilidade.addEventListener('click', function() {
-        estadoFonte = (estadoFonte + 1) % 3;
-        
-        // Remover todas as classes de fonte primeiro
+// Gerenciador de Estado Global
+const EstadoAcessibilidade = {
+    // Estado da fonte
+    fonte: localStorage.getItem('preferenciaFonte') ? parseInt(localStorage.getItem('preferenciaFonte')) : 0,
+    
+    // Estado do daltonismo
+    daltonismo: localStorage.getItem('modoDaltonismo') ? parseInt(localStorage.getItem('modoDaltonismo')) : 0,
+    
+    // Aplicar configurações salvas
+    aplicarConfiguracoes: function() {
+        // Aplicar configuração de fonte
         document.body.classList.remove('font-ampliada', 'font-extra-ampliada');
         
-        // Aplicar a classe correspondente ao estado atual
-        if (estadoFonte === 1) {
+        if (this.fonte === 1) {
             document.body.classList.add('font-ampliada');
-            this.setAttribute('aria-label', 'Tamanho da fonte ampliado. Clique para aumentar mais');
-            console.log('Fonte ampliada ativada');
-        } else if (estadoFonte === 2) {
+        } else if (this.fonte === 2) {
             document.body.classList.add('font-extra-ampliada');
-            this.setAttribute('aria-label', 'Tamanho da fonte extra ampliado. Clique para voltar ao normal');
-            console.log('Fonte extra ampliada ativada');
-        } else {
-            this.setAttribute('aria-label', 'Aumentar tamanho da fonte');
-            console.log('Fonte normal ativada');
         }
         
-        // Salvar preferência no localStorage
-        localStorage.setItem('preferenciaFonte', estadoFonte.toString());
-    });
-}
+        // Aplicar configuração de daltonismo
+        document.body.classList.remove('modo-protanopia', 'modo-tritanopia', 'modo-alto-contraste');
+        
+        if (this.daltonismo === 1) {
+            document.body.classList.add('modo-protanopia');
+        } else if (this.daltonismo === 2) {
+            document.body.classList.add('modo-tritanopia');
+        } else if (this.daltonismo === 3) {
+            document.body.classList.add('modo-alto-contraste');
+        }
+        
+        // Atualizar textos dos botões
+        this.atualizarBotoes();
+    },
+    
+    // Atualizar textos dos botões
+    atualizarBotoes: function() {
+        const btnFonte = document.getElementById('btn-acessibilidade');
+        const btnDaltonismo = document.getElementById('btn-daltonismo');
+        
+        if (btnFonte) {
+            if (this.fonte === 1) {
+                btnFonte.innerHTML = '<i class="fas fa-font"></i> A++';
+                btnFonte.setAttribute('aria-label', 'Tamanho da fonte ampliado. Clique para aumentar mais');
+            } else if (this.fonte === 2) {
+                btnFonte.innerHTML = '<i class="fas fa-font"></i> A+++';
+                btnFonte.setAttribute('aria-label', 'Tamanho da fonte extra ampliado. Clique para voltar ao normal');
+            } else {
+                btnFonte.innerHTML = '<i class="fas fa-font"></i> A+';
+                btnFonte.setAttribute('aria-label', 'Aumentar tamanho da fonte');
+            }
+        }
+        
+        if (btnDaltonismo) {
+            if (this.daltonismo === 1) {
+                btnDaltonismo.innerHTML = '<i class="fas fa-eye"></i> Proto/Deutero';
+            } else if (this.daltonismo === 2) {
+                btnDaltonismo.innerHTML = '<i class="fas fa-eye"></i> Tritano';
+            } else if (this.daltonismo === 3) {
+                btnDaltonismo.innerHTML = '<i class="fas fa-eye"></i> Contraste';
+            } else {
+                btnDaltonismo.innerHTML = '<i class="fas fa-eye"></i> Daltonismo';
+            }
+        }
+    },
+    
+    // Salvar configurações
+    salvarConfiguracoes: function() {
+        localStorage.setItem('preferenciaFonte', this.fonte.toString());
+        localStorage.setItem('modoDaltonismo', this.daltonismo.toString());
+    }
+};
 
-// Restaurar preferência de fonte ao carregar a página
+// Inicializar estado ao carregar a página
 document.addEventListener('DOMContentLoaded', function() {
-    // Restaurar preferência de fonte
-    const fonteSalva = localStorage.getItem('preferenciaFonte');
-    if (fonteSalva !== null) {
-        estadoFonte = parseInt(fonteSalva);
-        
-        document.body.classList.remove('font-ampliada', 'font-extra-ampliada');
-        
-        if (estadoFonte === 1) {
-            document.body.classList.add('font-ampliada');
-            if (btnAcessibilidade) {
-                btnAcessibilidade.setAttribute('aria-label', 'Tamanho da fonte ampliado. Clique para aumentar mais');
-            }
-        } else if (estadoFonte === 2) {
-            document.body.classList.add('font-extra-ampliada');
-            if (btnAcessibilidade) {
-                btnAcessibilidade.setAttribute('aria-label', 'Tamanho da fonte extra ampliado. Clique para voltar ao normal');
-            }
-        }
+    EstadoAcessibilidade.aplicarConfiguracoes();
+    
+    // Configurar botão de fonte
+    const btnFonte = document.getElementById('btn-acessibilidade');
+    if (btnFonte) {
+        btnFonte.addEventListener('click', function() {
+            EstadoAcessibilidade.fonte = (EstadoAcessibilidade.fonte + 1) % 3;
+            EstadoAcessibilidade.aplicarConfiguracoes();
+            EstadoAcessibilidade.salvarConfiguracoes();
+        });
+    }
+    
+    // Configurar botão de daltonismo
+    const btnDaltonismo = document.getElementById('btn-daltonismo');
+    if (btnDaltonismo) {
+        btnDaltonismo.addEventListener('click', function() {
+            EstadoAcessibilidade.daltonismo = (EstadoAcessibilidade.daltonismo + 1) % 4;
+            EstadoAcessibilidade.aplicarConfiguracoes();
+            EstadoAcessibilidade.salvarConfiguracoes();
+        });
     }
     
     // Configurar foco para elementos interativos
     document.querySelectorAll('button, a, input, select, [tabindex]').forEach(elemento => {
         elemento.addEventListener('focus', function() {
             this.style.outline = '3px solid #FFCC00';
+            this.style.outlineOffset = '2px';
         });
         
         elemento.addEventListener('blur', function() {
             this.style.outline = '';
+            this.style.outlineOffset = '';
         });
     });
-    
-    // Debug: verificar se o botão está funcionando
-    if (btnAcessibilidade) {
-        console.log('Botão de acessibilidade encontrado e configurado');
-    } else {
-        console.log('Botão de acessibilidade não encontrado');
-    }
 });
-
-// Funções para a lista de consultas (compartilhadas)
-window.cancelarConsulta = function(botao, idConsulta) {
-    if (confirm('Tem certeza que deseja cancelar esta consulta?')) {
-        const consultaDiv = botao.closest('.card');
-        
-        // Se um ID foi fornecido, remover do localStorage
-        if (idConsulta) {
-            const consultas = JSON.parse(localStorage.getItem('consultasSUS') || '[]');
-            const consultasAtualizadas = consultas.filter(consulta => consulta.id !== idConsulta);
-            localStorage.setItem('consultasSUS', JSON.stringify(consultasAtualizadas));
-        }
-        
-        consultaDiv.remove();
-        
-        const listaConsultas = document.getElementById('lista-consultas');
-        if (listaConsultas && listaConsultas.children.length === 0) {
-            document.getElementById('mensagem-sem-consultas').style.display = 'block';
-            listaConsultas.style.display = 'none';
-        }
-        
-        // Atualizar dashboard se estiver na página inicial
-        const mensagemProximaConsulta = document.getElementById('mensagem-proxima-consulta');
-        if (mensagemProximaConsulta) {
-            const consultas = JSON.parse(localStorage.getItem('consultasSUS') || '[]');
-            if (consultas.length === 0) {
-                mensagemProximaConsulta.textContent = 'Você não tem consultas agendadas no momento.';
-            } else {
-                const proximaConsulta = consultas.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))[0];
-                mensagemProximaConsulta.innerHTML = `
-                    <strong>${proximaConsulta.especialidade}</strong><br>
-                    Data: ${proximaConsulta.data}<br>
-                    Horário: ${proximaConsulta.horario}<br>
-                    Local: ${proximaConsulta.unidade}
-                `;
-            }
-        }
-    }
-};
-
-window.verDetalhes = function(botao) {
-    const consultaDiv = botao.closest('.card');
-    const especialidade = consultaDiv.querySelector('h3').textContent;
-    const data = consultaDiv.querySelectorAll('p')[0].textContent;
-    const horario = consultaDiv.querySelectorAll('p')[1].textContent;
-    const local = consultaDiv.querySelectorAll('p')[2].textContent;
-    
-    alert('Detalhes da consulta:\n\n' + 
-          especialidade + '\n' +
-          data + '\n' +
-          horario + '\n' +
-          local);
-};
