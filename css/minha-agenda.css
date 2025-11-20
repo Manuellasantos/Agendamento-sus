@@ -8,8 +8,8 @@
 
 /* Lista de consultas */
 .consulta-item {
-    border-left: 4px solid var(--azul-sus);
     margin-bottom: 2rem;
+    margin-left: 10px;
     transition: all 0.3s ease;
 }
 
