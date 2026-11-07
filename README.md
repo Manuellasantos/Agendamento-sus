@@ -4,6 +4,9 @@ Projeto da **Atividade Final de UDIAD**, cujo objetivo era criar um protótipo f
 
 A solução escolhida foi uma plataforma de agendamento de consultas ou serviços, onde o usuário escolhe o atendimento que precisa, marca o horário e acompanha seus agendamentos.
 
+# Acesse aqui:
+https://manuellasantos.github.io/Agendamento-sus/
+
 ## Prévia
 ![Prévia da plataforma de agendamento](preview.png)
 
